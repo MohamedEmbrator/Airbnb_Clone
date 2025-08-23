@@ -11,11 +11,8 @@ type SearchParams = {
   endDate: string;
   numOfGuests: string;
 };
-const SearchResult = async ({
-  searchParams: { location, startDate, endDate, numOfGuests },
-}: {
-  searchParams: SearchParams;
-}) => {
+const SearchResult = async ({ searchParams }: { searchParams: SearchParams }) => {
+  const { location, startDate, endDate, numOfGuests } = searchParams;
   let formatedStartDate;
   let formatedEndDate;
   if (startDate && endDate) {
