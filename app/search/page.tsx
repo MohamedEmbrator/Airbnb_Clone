@@ -5,13 +5,6 @@ import { getSearchResult } from "../utils/api";
 import ListingCard from "../components/ListingCard";
 import Footer from "../components/Footer";
 
-type SearchParams = {
-  location: string;
-  startDate: string;
-  endDate: string;
-  numOfGuests: string;
-};
-
 const SearchResult = async ({ searchParams }: { searchParams: Promise<{ location?: string; startDate?: string; endDate?: string;  numOfGuests?: string}> }) => {
   const { location, startDate, endDate, numOfGuests } = await searchParams;
   let formatedStartDate;
