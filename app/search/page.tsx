@@ -6,11 +6,12 @@ import ListingCard from "../components/ListingCard";
 import Footer from "../components/Footer";
 
 type SearchParams = {
-  location: string;
-  startDate: string;
-  endDate: string;
-  numOfGuests: string;
+  location?: string;
+  startDate?: string;
+  endDate?: string;
+  numOfGuests?: string;
 };
+
 const SearchResult = async ({ searchParams }: { searchParams: SearchParams }) => {
   const { location, startDate, endDate, numOfGuests } = searchParams;
   let formatedStartDate;
