@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "next": "15.5.0",
+    "nextjs-toploader": "^3.8.16",
     "react": "19.1.0",
     "react-date-range": "^2.0.1",
     "react-dom": "19.1.0"

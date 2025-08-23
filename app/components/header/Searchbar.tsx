@@ -5,7 +5,7 @@ import { useState } from "react";
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-const Searchbar = () => {
+const Searchbar = ({ placeholder }: { placeholder?: string }) => {
   const [searchText, setSearchText] = useState<string>("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -21,7 +21,7 @@ const Searchbar = () => {
         <input
           value={searchText}
           type="text"
-          placeholder="Start your search"
+          placeholder={placeholder || 'Start your search'}
           onChange={(e) => setSearchText(e.target.value)}
           className="text-sm text-gray-600 placeholder-gray-400 flex-grow pl-5 bg-transparent outline-none"
         />
