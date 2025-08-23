@@ -1,21 +1,23 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
 import { format } from "date-fns";
 import Header from "../components/header/Header";
 import { SearchResultData } from "../types/app";
 import { getSearchResult } from "../utils/api";
 import ListingCard from "../components/ListingCard";
 import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
 
-type SearchParams = {
-  location?: string;
-  startDate?: string;
-  endDate?: string;
-  numOfGuests?: string;
-};
+const SearchResult = () => {
+  const searchParams = useSearchParams();
+  const location = searchParams.get("location") || "";
+  const startDate = searchParams.get("startDate") || "";
+  const endDate = searchParams.get("endDate") || "";
+  const numOfGuests = searchParams.get("numOfGuests") || "";
 
-const SearchResult = async ({ searchParams }: { searchParams: SearchParams }) => {
-  const { location, startDate, endDate, numOfGuests } = searchParams;
-  let formatedStartDate;
-  let formatedEndDate;
+  let formatedStartDate = "";
+  let formatedEndDate = "";
   if (startDate && endDate) {
     formatedStartDate = format(new Date(startDate), "dd MMMM yy");
     formatedEndDate = format(new Date(endDate), "dd MMMM yy");
@@ -28,7 +30,18 @@ const SearchResult = async ({ searchParams }: { searchParams: SearchParams }) =>
     "Rooms and Beds",
     "More filters",
   ];
-  const searchResultData: SearchResultData = await getSearchResult();
+
+  const [searchResultData, setSearchResultData] = useState<SearchResultData>(
+    []
+  );
+
+  useEffect(() => {
+    async function fetchSearchResult() {
+      const getsearchResultData: SearchResultData = await getSearchResult();
+      setSearchResultData(getsearchResultData);
+    }
+    fetchSearchResult();
+  }, []);
   return (
     <>
       <Header placeholder={`${location} | ${range} | ${numOfGuests} guests`} />
